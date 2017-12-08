@@ -1,0 +1,26 @@
+{
+  "name": "node-hangman",
+  "version": "1.0.0",
+  "description": "Command Line Hangman Game",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wmadhatterw/Node-Hangman.git"
+  },
+  "author": "Seth Walton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wmadhatterw/Node-Hangman/issues"
+  },
+  "homepage": "https://github.com/wmadhatterw/Node-Hangman#readme",
+  "dependencies": {
+    "inquirer": "^4.0.1",
+    "is-letter": "^1.1.1"
+  }
+}
