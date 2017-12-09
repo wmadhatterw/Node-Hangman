@@ -3,17 +3,14 @@ var inquirer = require('inquirer');
 var isLetter = require('is-letter');
 //require objects/exports
 var Word = require('./word.js');
-var Game = require('./game.js');
+var Game = "";//require('./game.js');
 //hangman graphic
-var hangManDisplay = Game.newWord.hangman;
-//win loss variables
 var wins = 0;
 var loss = 0;
 //user name holder
 var hold = "";
-
-//set the maxListener
-require('events').EventEmitter.prototype._maxListeners = 100;
+var gameType = 0;
+var hangManDisplay = "";
 
 console.log("Welcome to CryptoCoin Hangman!!!  Here you will play hangman with random cryptocurrencies");
 
@@ -25,14 +22,57 @@ var startPrompt = function(){
       }, 
     ]).then(function(answers) {
       hold = answers.name;
-      console.log("Great lets Play " + hold.toUpperCase() + "!" )
-      hangman.startGame();
+      console.log("Great lets Play " + answers.name )
+      gameChoice();
     })
 };
 startPrompt();
-// hangman Object to run game
+var gameChoice = function(){
+  inquirer.prompt([
+      {
+        type: "rawlist",
+        name: "choice",
+        message: "What hangman game do you want to play?",
+        choices: ["CryptoCoin", "Super Hero TV Shows"]
+      }, 
+    ]).then(function(answers) {
+      switch (answers.choice) {
+        case 'CryptoCoin':
+          Game = require('./game.js')
+          console.log("Welcome to CryptoCoin Hangman!!!  Here you will play hangman with random cryptocurrencies");
+          // gameType = 1;
+          hangManDisplay = Game.newWord.hangman;
+          hangman.startGame();
+          break;
+        case 'Super Hero TV Shows':
+          Game = require('./game2.js')
+          console.log("Welcome to Super Hero TV Shows Hangman!!!  Here you will play hangman with random TV Shows");
+          // hangManDisplay = Game2.newWord.hangman
+          // gameType = 2;
+          hangManDisplay = Game.newWord.hangman;
+          hangman.startGame();
+          break;
+        };
+
+    })
+};
+
+
+
+
+
+// var hangManDisplay = Game.newWord.hangman;
+//win loss variables
+
+
+
+//set the maxListener
+// require('events').EventEmitter.prototype._maxListeners = 100;
+
+
 var hangman = {
   wordBank: Game.newWord.wordList,
+  // wordBank2: Game.newWord.wordList2,
   guessesRemaining: 10,
   //empty array to hold letters guessed by user, and checks if the user guessed the letter already
   guessedLetters: [],
@@ -58,25 +98,46 @@ var hangman = {
       } else if(wins > loss){
         console.log("Winner Winner Chicken Dinner");
       } else {
-        console.log("Go Back to Hangman School " + hold.toUpperCase() + "!")
+        console.log("Go Back to Hangman school " + hold)
       }
     })},
   //if they want to play starts new game.
   newGame: function() {
-    if(this.guessesRemaining === 10) {
-      console.log("Okay! Good Luck!");
-      console.log('*****************');
-      //generates random number based on the wordBank
-      var randNum = Math.floor(Math.random()*this.wordBank.length);
-      this.currentWord = new Word(this.wordBank[randNum]);
-      this.currentWord.getLets();
-      //displays current word as blanks.
-      console.log(this.currentWord.wordRender());
-      this.keepPromptingUser();
-    } else{
-      this.resetGuessesRemaining();
-      this.newGame();
+    if(gameType===1){
+          if(this.guessesRemaining === 10) {
+            console.log("Okay! Good Luck!");
+            console.log('*****************');
+            //generates random number based on the wordBank
+
+            var randNum = Math.floor(Math.random()*this.wordBank.length);
+            this.currentWord = new Word(this.wordBank[randNum]);
+            this.currentWord.getLets();
+            //displays current word as blanks.
+            console.log(this.currentWord.wordRender());
+            this.keepPromptingUser();
+          } else{
+            this.resetGuessesRemaining();
+            this.newGame();
+          }
+    }else{
+      if(this.guessesRemaining === 10) {
+            console.log("Okay! Good Luck!");
+            console.log('*****************');
+            //generates random number based on the wordBank
+
+            randNum = Math.floor(Math.random()*2);
+            this.currentWord = new Word(Game.newWord.wordList2[randNum]);
+            this.currentWord.getLets();
+            //displays current word as blanks.
+            console.log(this.currentWord.wordRender());
+            this.keepPromptingUser();
+          } else{
+            this.resetGuessesRemaining();
+            this.newGame();
+          }
+
     }
+
   },
   resetGuessesRemaining: function() {
     this.guessesRemaining = 10;
@@ -156,3 +217,6 @@ var hangman = {
     });
   }
 }
+
+// hangman.startGame();
+
