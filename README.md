@@ -23,8 +23,9 @@ Prerequisites
 The following NPM packages are dependencies:
 
 inquirer
-
 is-letter
+
+
 ----------------------------------------------------------------------------
 Enjoy
 ## Author
