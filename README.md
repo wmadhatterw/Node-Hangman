@@ -4,6 +4,7 @@ Command Line Hangman Game
 Hello to use this game clone contents, then run npm install.  Next just run "node main" in your Command Line Interface.  Good LUCK!
 
 This project is a CLI. To clone this repo and use the CLI on your machine follow these instructions.
+----------------------------------------------------------------------------
 
 Install/Use instructions
 
@@ -15,7 +16,7 @@ npm install
 4. Type following in Terminal
 node main.js
 
-
+----------------------------------------------------------------------------
 
 Prerequisites
 
@@ -24,7 +25,7 @@ The following NPM packages are dependencies:
 inquirer
 
 is-letter
-
+----------------------------------------------------------------------------
 Enjoy
 ## Author
 
